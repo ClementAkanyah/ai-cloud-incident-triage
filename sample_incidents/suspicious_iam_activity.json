@@ -1,0 +1,18 @@
+{
+  "incident_id": "INC-001",
+  "title": "Suspicious IAM Credential Activity",
+  "source": "Amazon GuardDuty",
+  "severity": "HIGH",
+  "resource_type": "IAMUser",
+  "resource_name": "test-security-user",
+  "event_type": "UnauthorizedAccess:IAMUser/ConsoleLoginSuccess.B",
+  "region": "us-east-2",
+  "timestamp": "2026-10-07T20:15:00Z",
+  "description": "A successful console login was observed for an IAM user from an unusual external IP address and location.",
+  "evidence": {
+    "source_ip": "203.0.113.50",
+    "authentication_method": "Password",
+    "mfa_used": false,
+    "previous_failed_logins": 5
+  }
+}
