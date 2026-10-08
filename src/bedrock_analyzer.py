@@ -1,4 +1,4 @@
-
+﻿
 import json
 import boto3
 from botocore.exceptions import BotoCoreError, ClientError
@@ -66,7 +66,7 @@ Return an incident analysis containing:
             }
         ],
         inferenceConfig={
-            "maxTokens": 1000,
+            "maxTokens": 2000,
             "temperature": 0
         }
     )
@@ -138,3 +138,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
