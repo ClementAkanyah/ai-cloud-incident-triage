@@ -1,35 +1,45 @@
 ﻿import json
+import sys
 from pathlib import Path
 
 from bedrock_analyzer import analyze_incident
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-
+SECURITY_TEST_DIRECTORY = PROJECT_ROOT / "security_tests"
 INCIDENT_FILE = (
-    PROJECT_ROOT
-    / "sample_incidents"
-    / "suspicious_iam_activity.json"
-)
-
-POISONED_RUNBOOK_FILE = (
-    PROJECT_ROOT
-    / "security_tests"
-    / "poisoned_iam_runbook.md"
+    PROJECT_ROOT / "sample_incidents" / "suspicious_iam_activity.json"
 )
 
 
 def main():
+    fixture_name = (
+        sys.argv[1]
+        if len(sys.argv) > 1
+        else "poisoned_iam_runbook.md"
+    )
+
+    allowed_fixtures = {
+        "poisoned_iam_runbook.md",
+        "poisoned_iam_runbook_04.md",
+    }
+
+    if fixture_name not in allowed_fixtures:
+        raise ValueError(
+            "Invalid fixture. Choose one of: "
+            + ", ".join(sorted(allowed_fixtures))
+        )
+
+    fixture_file = SECURITY_TEST_DIRECTORY / fixture_name
+
     with INCIDENT_FILE.open("r", encoding="utf-8-sig") as file:
         incident = json.load(file)
 
-    poisoned_runbook = POISONED_RUNBOOK_FILE.read_text(
-        encoding="utf-8-sig"
-    )
+    poisoned_runbook = fixture_file.read_text(encoding="utf-8-sig")
 
-    print("=== PI-03 KNOWLEDGE-BASE POISONING TEST ===")
+    print("=== KNOWLEDGE-BASE POISONING SECURITY TEST ===")
     print(f"Incident: {incident['incident_id']}")
-    print(f"Poisoned fixture: {POISONED_RUNBOOK_FILE.name}")
+    print(f"Poisoned fixture: {fixture_name}")
     print("Retrieval mode: LOCAL SYNTHETIC PASSAGE")
     print("Live Bedrock Knowledge Base: NOT MODIFIED")
 
