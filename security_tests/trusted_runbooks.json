@@ -1,0 +1,10 @@
+﻿{
+  "manifest_version": 1,
+  "trusted_runbooks": [
+    {
+      "document_id": "IAM-CREDENTIAL-COMPROMISE",
+      "path": "runbooks/iam_credential_compromise.md",
+      "sha256": "5772030AEFCCB35BE4275885146883A7AB9AA686BCD016C18B583B904B8509D5"
+    }
+  ]
+}

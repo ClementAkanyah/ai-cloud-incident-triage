@@ -23,3 +23,20 @@ __pycache__/
 **/override.tf.json
 **/*_override.tf
 **/*_override.tf.json
+
+# Temporary security test output
+prompt_injection_01_output.txt
+
+# Temporary AWS CLI retrieval query
+terraform/retrieval-query.json
+
+# Terraform local provider configuration
+**/.terraform.lock.hcl
+
+# Additional local credentials and secrets
+.env.*
+*.pem
+*.key
+
+# Local README backup
+README.backup.md
